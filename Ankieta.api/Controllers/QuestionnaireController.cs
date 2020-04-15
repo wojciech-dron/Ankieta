@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Angular.api.Data;
+using Angular.api.Models;
+using Ankieta.api.Dtos;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Ankieta.api.Controllers
 {
-    public class QuestionnaireController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    public class QuestionnaireController : ControllerBase
     {
         private readonly DataContext _context;
 
@@ -16,9 +20,19 @@ namespace Ankieta.api.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        ////http://localhost:55921/api/questionnaire/create
+        //[HttpPost("create")]
+        //public IActionResult Create()
+        //{
+        //    return Ok();
+        //}
+
+        //http://localhost:55921/api/questionnaire/create
+        [HttpPost("create")]
+        public IActionResult Create(QuestToCreateDTO questionnaire)
         {
-            return View();
+
+            return Ok(questionnaire);
         }
     }
 }

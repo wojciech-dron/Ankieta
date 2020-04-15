@@ -1,0 +1,40 @@
+<div class="col-md-8 order-md-1">
+  <h4 class="mb-3">Tworzenie ankiety</h4>
+
+  <form [formGroup]="questionnaireForm">
+    <div class="mb-3">
+      <label for="title">Tytuł ankiety: </label>
+      <input class="form-control" formControlName="title" placeholder="Ankieta">
+      <!-- <div *ngIf="questionnaireForm.get('title').errors.required">
+        Name is required.
+      </div> -->
+    </div>
+
+    <div class="mb-3">
+      <label for="option">Czas trwania (w minutach):</label>
+      <input class="form-control" formControlName="time" placeholder="10">
+      <div class="invalid-feedback">
+        Pole jest wymagane.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="title">Odpowiedzi: </label>
+      <div formArrayName="answers" *ngFor="let ans of questionnaireForm.get('answers')['controls']; let i = index;">
+        <div [formGroupName]="i">
+          <input class="form-control mb-1" formControlName="answer" placeholder="Odpowiedź {{i+1}}">
+        </div>
+      </div>
+      <div>
+        <button (click)="addAnswer()">Dodaj</button>
+        <button (click)="removeAnswer()">Usuń</button>
+      </div>
+
+    </div>
+
+    <button class="btn btn-primary btn-lg btn-block" (click)="submit()" [disabled]="questionnaireForm.invalid">Continue to checkout</button>
+  </form>
+
+  Form Status: {{ questionnaireForm.status }}
+</div>
+
