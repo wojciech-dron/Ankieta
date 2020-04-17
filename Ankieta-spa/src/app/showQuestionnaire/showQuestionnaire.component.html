@@ -1,0 +1,26 @@
+<div class="container">
+  <h2 class="mb-3">{{questionnaire.title}}</h2>
+
+  <h6>Odpowiedzi:</h6>
+  <form [formGroup]="vote">
+    <div class="mb-3 pl-3">
+      <div class="mb-3" *ngFor="let answer of questionnaire.answers">
+        <div class="form-check">
+          <input type="radio" id="{{answer.id}}" class="form-check-input" formControlName="answerId"
+            value="{{answer.id}}">
+          <label for="{{answer.id}}" class="form-check-label">{{answer.content}}</label>
+        </div>
+        <span class="small">Liczba głosów: {{answer.votes}}</span>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <h6 for="user">Nick:</h6>
+      <input class="form-control" formControlName="user" placeholder="Twój nick"
+        [ngClass]="{'is-invalid': vote.get('user').errors && vote.get('user').touched}">
+      <div class="invalid-feedback">Proszę podać swój nick.</div>
+    </div>
+
+    <button class="btn btn-primary btn-lg btn-block" [disabled]="vote.invalid">Wyślij głos</button>
+  </form>
+</div>

@@ -7,6 +7,6 @@ namespace Ankieta.api.Dtos
 {
     public class AnswerToCreateDTO
     {
-        public string Answer { get; set; }
+        public string Content { get; set; }
     }
 }

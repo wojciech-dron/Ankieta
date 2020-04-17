@@ -9,5 +9,6 @@ namespace Angular.api.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public ICollection<Answer> Answers { get; set; }
     }
 }

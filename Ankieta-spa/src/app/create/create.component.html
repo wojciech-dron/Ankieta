@@ -1,40 +1,37 @@
-<div class="col-md-8 order-md-1">
-  <h4 class="mb-3">Tworzenie ankiety</h4>
+<div class="container">
+  <h2 class="mb-3">Tworzenie ankiety:</h2>
 
   <form [formGroup]="questionnaireForm">
     <div class="mb-3">
-      <label for="title">Tytuł ankiety: </label>
-      <input class="form-control" formControlName="title" placeholder="Ankieta">
-      <!-- <div *ngIf="questionnaireForm.get('title').errors.required">
-        Name is required.
-      </div> -->
+      <h6>Tytuł ankiety:</h6>
+      <input class="form-control" formControlName="title" placeholder="Twoja ankieta"
+        [ngClass]="{'is-invalid': questionnaireForm.get('title').errors && questionnaireForm.get('title').touched}">
+      <div class="invalid-feedback">Proszę podać nazwę ankiety.</div>
     </div>
 
     <div class="mb-3">
-      <label for="option">Czas trwania (w minutach):</label>
-      <input class="form-control" formControlName="time" placeholder="10">
-      <div class="invalid-feedback">
-        Pole jest wymagane.
-      </div>
+      <h6>Czas trwania (w minutach):</h6>
+      <input class="form-control" formControlName="time" placeholder="10" type="number" maxlength="3"
+        [ngClass]="{'is-invalid': questionnaireForm.get('time').errors && questionnaireForm.get('time').touched}">
+      <div class="invalid-feedback">Proszę podać czas od 1 min do 99 min.</div>
     </div>
 
     <div class="mb-3">
-      <label for="title">Odpowiedzi: </label>
+      <h6>Odpowiedzi:</h6>
       <div formArrayName="answers" *ngFor="let ans of questionnaireForm.get('answers')['controls']; let i = index;">
-        <div [formGroupName]="i">
-          <input class="form-control mb-1" formControlName="answer" placeholder="Odpowiedź {{i+1}}">
+        <div class="mb-1" [formGroupName]="i">
+          <input class="form-control" formControlName="content" placeholder="Twoja odpowiedź nr {{i+1}}"
+            [ngClass]="{'is-invalid': ans.get('content').errors && ans.get('content').touched}">
+          <div class="invalid-feedback">Proszę podać pytanie.</div>
         </div>
       </div>
       <div>
-        <button (click)="addAnswer()">Dodaj</button>
-        <button (click)="removeAnswer()">Usuń</button>
+        <button class="btn btn-primary" (click)="addAnswer()">Dodaj</button>
+        <button class="btn btn-light" (click)="removeAnswer()">Usuń</button>
       </div>
-
     </div>
 
-    <button class="btn btn-primary btn-lg btn-block" (click)="submit()" [disabled]="questionnaireForm.invalid">Continue to checkout</button>
+    <button class="btn btn-primary btn-lg btn-block" (click)="submit()" [disabled]="questionnaireForm.invalid">Stwórz
+      ankietę</button>
   </form>
-
-  Form Status: {{ questionnaireForm.status }}
 </div>
-

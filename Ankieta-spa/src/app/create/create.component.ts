@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
 import { QuestionnaireService } from '../_services/questionnaire.service';
 
 @Component({
@@ -14,12 +14,10 @@ export class CreateComponent implements OnInit {
 
   ngOnInit() {
     this.questionnaireForm = this.formBuilder.group({
-      title: ['', Validators.required],
-      time: ['', Validators.required],
+      title: new FormControl('', Validators.required),
+      time: new FormControl(10, [Validators.required, Validators.min(1), Validators.max(99)]),
       answers: this.formBuilder.array([this.newAnswer()])
     });
-
-    // this.questionnaireForm.valueChanges.subscribe(newValues => console.log(newValues));
   }
 
   submit() {
@@ -30,7 +28,7 @@ export class CreateComponent implements OnInit {
 
   newAnswer(): FormGroup {
     return this.formBuilder.group({
-      answer: ['', Validators.required]
+      content: new FormControl('', Validators.required)
     });
   }
 

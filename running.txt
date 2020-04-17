@@ -1,0 +1,8 @@
+api:
+cd .\Ankieta.api
+dotnet watch run
+
+ska
+cd .\Ankieta-spa
+ng serve
+

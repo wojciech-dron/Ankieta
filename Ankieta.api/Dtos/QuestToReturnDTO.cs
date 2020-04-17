@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 namespace Ankieta.api.Dtos
 {
-    public class QuestToCreateDTO
+    public class QuestToReturnDTO
     {
         public string Title { get; set; }
-        public int Time { get; set; }
-        public ICollection<AnswerToCreateDTO> Answers { get; set; }
+        public DateTime ExpirationAt { get; set; }
+        public ICollection<AnswerToReturnDTO> Answers { get; set; }
     }
 }

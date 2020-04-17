@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Ankieta.api.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200402214202_Init")]
-    partial class Init
+    [Migration("20200415165933_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,7 +27,13 @@ namespace Ankieta.api.Migrations
 
                     b.Property<int>("QuestionnaireId");
 
+                    b.Property<int?>("UserId");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("QuestionnaireId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Answers");
                 });
@@ -37,7 +43,7 @@ namespace Ankieta.api.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Options");
+                    b.Property<DateTime>("ExpirationAt");
 
                     b.Property<string>("Title");
 
@@ -51,22 +57,23 @@ namespace Ankieta.api.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("AnswerId");
-
                     b.Property<string>("Name");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AnswerId");
-
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Angular.api.Models.User", b =>
+            modelBuilder.Entity("Angular.api.Models.Answer", b =>
                 {
-                    b.HasOne("Angular.api.Models.Answer")
-                        .WithMany("Users")
-                        .HasForeignKey("AnswerId");
+                    b.HasOne("Angular.api.Models.Questionnaire")
+                        .WithMany("Answers")
+                        .HasForeignKey("QuestionnaireId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Angular.api.Models.User")
+                        .WithMany("Answers")
+                        .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618
         }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Angular.api.Data;
+using Ankieta.api.Data;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -30,6 +32,8 @@ namespace Ankieta.api
             (Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddCors();
+            services.AddAutoMapper(typeof(QRepository).Assembly);
+            services.AddScoped<QRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

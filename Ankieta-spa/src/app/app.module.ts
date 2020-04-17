@@ -7,11 +7,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CreateComponent } from './create/create.component';
 import { QuestionnaireService } from './_services/questionnaire.service';
+import { ShowQuestionnaireComponent } from './showQuestionnaire/showQuestionnaire.component';
+import { ShowQuestResolver } from './_resolvers/showQuestionnaire.resolver';
 
 @NgModule({
    declarations: [
       AppComponent,
       CreateComponent,
+      ShowQuestionnaireComponent
    ],
    imports: [
       BrowserModule,
@@ -20,11 +23,12 @@ import { QuestionnaireService } from './_services/questionnaire.service';
       HttpClientModule
    ],
    providers: [
-      QuestionnaireService
+      QuestionnaireService,
+      ShowQuestResolver
    ],
    bootstrap: [
       AppComponent,
-      CreateComponent,
+      // CreateComponent
    ]
 })
 export class AppModule { }
