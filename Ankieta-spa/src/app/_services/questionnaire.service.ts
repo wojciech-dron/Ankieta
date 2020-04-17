@@ -19,4 +19,8 @@ export class QuestionnaireService {
   getQuestionnaire(id: number): Observable<Question> {
     return this.http.get<Question>(this.baseUrl + 'questionnaire/' + id);
   }
+
+  sendVote(vote: any) {
+    return this.http.post(this.baseUrl + 'questionnaire/vote', vote);
+  }
 }

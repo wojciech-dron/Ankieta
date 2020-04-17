@@ -7,8 +7,9 @@ namespace Ankieta.api.Dtos
 {
     public class QuestToReturnDTO
     {
+        public int Id { get; set; }
         public string Title { get; set; }
-        public DateTime ExpirationAt { get; set; }
+        public bool IsActive { get; set; }
         public ICollection<AnswerToReturnDTO> Answers { get; set; }
     }
 }

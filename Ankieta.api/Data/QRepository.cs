@@ -1,5 +1,4 @@
-﻿using Angular.api.Data;
-using Angular.api.Models;
+﻿using Ankieta.api.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -26,7 +25,16 @@ namespace Ankieta.api.Data
         {
             return await _context
                 .Questionnaires
-                .Include(a => a.Answers)
+                .Include(q => q.Answers)
+                .ThenInclude(a => a.Votes)
+                .FirstOrDefaultAsync(q => q.Id == id);
+        }
+
+        public async Task<Answer> GetAnswer(int id)
+        {
+            return await _context
+                .Answers
+                .Include(a => a.Votes)
                 .FirstOrDefaultAsync(q => q.Id == id);
         }
 

@@ -7,14 +7,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CreateComponent } from './create/create.component';
 import { QuestionnaireService } from './_services/questionnaire.service';
-import { ShowQuestionnaireComponent } from './showQuestionnaire/showQuestionnaire.component';
+import { QuestionnaireComponent } from './Questionnaire/Questionnaire.component';
 import { ShowQuestResolver } from './_resolvers/showQuestionnaire.resolver';
+import { AlertifyService } from './_services/alertify.service';
 
 @NgModule({
    declarations: [
       AppComponent,
       CreateComponent,
-      ShowQuestionnaireComponent
+      QuestionnaireComponent,
    ],
    imports: [
       BrowserModule,
@@ -24,7 +25,8 @@ import { ShowQuestResolver } from './_resolvers/showQuestionnaire.resolver';
    ],
    providers: [
       QuestionnaireService,
-      ShowQuestResolver
+      ShowQuestResolver,
+      AlertifyService
    ],
    bootstrap: [
       AppComponent,

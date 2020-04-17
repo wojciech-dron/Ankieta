@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
 import { QuestionnaireService } from '../_services/questionnaire.service';
+import { AlertifyService } from '../_services/alertify.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create',
@@ -10,7 +12,10 @@ import { QuestionnaireService } from '../_services/questionnaire.service';
 export class CreateComponent implements OnInit {
   questionnaireForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private questService: QuestionnaireService) { }
+  constructor(private formBuilder: FormBuilder,
+              private questService: QuestionnaireService,
+              private alertify: AlertifyService,
+              private router: Router) { }
 
   ngOnInit() {
     this.questionnaireForm = this.formBuilder.group({
@@ -21,9 +26,11 @@ export class CreateComponent implements OnInit {
   }
 
   submit() {
-    this.questService.createQuestionaire(this.questionnaireForm.value).subscribe(data => {
-      console.log(data);
-    });
+    this.questService.createQuestionaire(this.questionnaireForm.value)
+      .subscribe(data => {
+        this.alertify.success('Utworzono pytanie!');
+        this.router.navigate(['/questionnaire/' + data]);
+      });
   }
 
   newAnswer(): FormGroup {

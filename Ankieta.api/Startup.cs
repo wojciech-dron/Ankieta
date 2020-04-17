@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Angular.api.Data;
 using Ankieta.api.Data;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;

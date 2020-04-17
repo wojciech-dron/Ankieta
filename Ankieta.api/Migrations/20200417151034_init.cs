@@ -22,27 +22,13 @@ namespace Ankieta.api.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Users",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Users", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Answers",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     QuestionnaireId = table.Column<int>(nullable: false),
-                    Content = table.Column<string>(nullable: true),
-                    UserId = table.Column<int>(nullable: true)
+                    Content = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -53,12 +39,26 @@ namespace Ankieta.api.Migrations
                         principalTable: "Questionnaires",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Votes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    AnswerId = table.Column<int>(nullable: false),
+                    Nick = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Votes", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Answers_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
+                        name: "FK_Votes_Answers_AnswerId",
+                        column: x => x.AnswerId,
+                        principalTable: "Answers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -67,21 +67,21 @@ namespace Ankieta.api.Migrations
                 column: "QuestionnaireId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Answers_UserId",
-                table: "Answers",
-                column: "UserId");
+                name: "IX_Votes_AnswerId",
+                table: "Votes",
+                column: "AnswerId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "Votes");
+
+            migrationBuilder.DropTable(
                 name: "Answers");
 
             migrationBuilder.DropTable(
                 name: "Questionnaires");
-
-            migrationBuilder.DropTable(
-                name: "Users");
         }
     }
 }

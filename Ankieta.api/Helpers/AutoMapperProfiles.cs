@@ -1,5 +1,5 @@
-﻿using Angular.api.Models;
-using Ankieta.api.Dtos;
+﻿using Ankieta.api.Dtos;
+using Ankieta.api.Models;
 using AutoMapper;
 using System;
 using System.Collections.Generic;
@@ -14,6 +14,7 @@ namespace Ankieta.api.Helpers
         {
             CreateMap<QuestToCreateDTO, Questionnaire>();
             CreateMap<AnswerToCreateDTO, Answer>();
+            CreateMap<VoteDTO, Vote>();
             CreateMap<Questionnaire, QuestToReturnDTO>();
             CreateMap<Answer, AnswerToReturnDTO>();
         }

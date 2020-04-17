@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Angular.api.Models
+namespace Ankieta.api.Models
 {
-    public class User
+    public class Vote
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public ICollection<Answer> Answers { get; set; }
+        public int AnswerId { get; set; }
+        public string Nick { get; set; }
     }
 }

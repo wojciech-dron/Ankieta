@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Angular.api.Data;
-using Angular.api.Models;
 using Ankieta.api.Data;
 using Ankieta.api.Dtos;
+using Ankieta.api.Models;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 
@@ -32,18 +31,30 @@ namespace Ankieta.api.Controllers
             var questFromRepo = await _qRepo.GetQuestionnaire(id);
 
             if (questFromRepo == null)
-            {
                 return BadRequest("Nie ma takiej ankiety.");
-            }
 
             var questToReturn = _mapper.Map<QuestToReturnDTO>(questFromRepo);
-
-            foreach (var answer in questToReturn.Answers)
-            {
-                answer.Votes = 0;
-            }
+            questToReturn.IsActive = questFromRepo.ExpirationAt > DateTime.Now ? true : false;
 
             return Ok(questToReturn);
+        }
+
+        [HttpPost("vote")]
+        public async Task<IActionResult> Vote(VoteDTO vote)
+        {
+            var answerFromRepo = await _qRepo.GetAnswer(vote.AnswerId);
+
+            if (answerFromRepo == null)
+                return BadRequest("Nie ma takiej odpowiedzi.");
+
+            var voteToCreate = _mapper.Map<Vote>(vote);
+
+            answerFromRepo.Votes.Add(voteToCreate);
+
+            if (await _qRepo.SaveAll())
+                return Ok();
+
+            throw new Exception($"Nie można dodać pytań");
         }
 
         //http://localhost:55921/api/questionnaire/create
@@ -52,20 +63,11 @@ namespace Ankieta.api.Controllers
         {
             var questionnaireToCreate = _mapper.Map<Questionnaire>(questionnaire);
             questionnaireToCreate.ExpirationAt = DateTime.Now.AddMinutes(questionnaire.Time);
+
             _qRepo.Add(questionnaireToCreate);
 
             if (await _qRepo.SaveAll())
-            {
-                foreach (var answer in questionnaireToCreate.Answers)
-                {
-                    answer.QuestionnaireId = questionnaireToCreate.Id;
-                }
-
-                if (await _qRepo.SaveAll())
-                    return NoContent();
-
-                throw new Exception($"Nie można dodać pytań");
-            }
+                return Ok(questionnaireToCreate.Id);
 
             throw new Exception($"Nie można utworzyć nowej ankiety");
         }

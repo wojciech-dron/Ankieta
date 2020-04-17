@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Angular.api.Models
+namespace Ankieta.api.Models
 {
     public class Questionnaire
     {

@@ -1,7 +1,7 @@
 <div class="container">
   <h2 class="mb-3">{{questionnaire.title}}</h2>
 
-  <h6>Odpowiedzi:</h6>
+  <h6 class="mb-3">Odpowiedzi:</h6>
   <form [formGroup]="vote">
     <div class="mb-3 pl-3">
       <div class="mb-3" *ngFor="let answer of questionnaire.answers">
@@ -10,17 +10,17 @@
             value="{{answer.id}}">
           <label for="{{answer.id}}" class="form-check-label">{{answer.content}}</label>
         </div>
-        <span class="small">Liczba głosów: {{answer.votes}}</span>
+        <span class="small">Liczba głosów: {{answer.votesCount}}</span>
       </div>
     </div>
 
     <div class="mb-3">
       <h6 for="user">Nick:</h6>
-      <input class="form-control" formControlName="user" placeholder="Twój nick"
-        [ngClass]="{'is-invalid': vote.get('user').errors && vote.get('user').touched}">
+      <input class="form-control" formControlName="nick" placeholder="Twój nick"
+        [ngClass]="{'is-invalid': vote.get('nick').errors && vote.get('nick').touched}">
       <div class="invalid-feedback">Proszę podać swój nick.</div>
     </div>
 
-    <button class="btn btn-primary btn-lg btn-block" [disabled]="vote.invalid">Wyślij głos</button>
+    <button class="btn btn-primary btn-lg btn-block" [disabled]="vote.invalid" (click)="submit()">Wyślij głos</button>
   </form>
 </div>
