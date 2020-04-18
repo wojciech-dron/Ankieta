@@ -17,6 +17,7 @@ namespace Ankieta.api.Helpers
             CreateMap<VoteDTO, Vote>();
             CreateMap<Questionnaire, QuestToReturnDTO>();
             CreateMap<Answer, AnswerToReturnDTO>();
+            CreateMap<Questionnaire, QuestionsToReturnDTO>();
         }
     }
 }

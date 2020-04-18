@@ -26,7 +26,7 @@ namespace Ankieta.api.Controllers
 
         //http://localhost:55921/api/questionnaire/2
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(int id)
+        public async Task<IActionResult> GetQuestion(int id)
         {
             var questFromRepo = await _qRepo.GetQuestionnaire(id);
 
@@ -39,6 +39,26 @@ namespace Ankieta.api.Controllers
             return Ok(questToReturn);
         }
 
+        //http://localhost:55921/api/questionnaire
+        [HttpGet]
+        public async Task<IActionResult> GetQuestions()
+        {
+            var questsFromRepo = await _qRepo.GetQuestionnaires();
+
+            if (questsFromRepo == null)
+                return BadRequest("Brak ankiet");
+
+            var questsToReturn = _mapper.Map<IEnumerable<QuestionsToReturnDTO>>(questsFromRepo);
+
+            foreach (var quest in questsToReturn)
+            {
+                quest.IsActive = quest.ExpirationAt > DateTime.Now ? true : false;
+            }
+
+            return Ok(questsToReturn);
+        }
+
+        //http://localhost:55921/api/questionnaire/vote
         [HttpPost("vote")]
         public async Task<IActionResult> Vote(VoteDTO vote)
         {

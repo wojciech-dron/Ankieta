@@ -7,7 +7,7 @@ import { catchError } from 'rxjs/operators';
 import { AlertifyService } from '../_services/alertify.service';
 
 @Injectable()
-export class ShowQuestResolver implements Resolve<Question> {
+export class QuestionnaireResolver implements Resolve<Question> {
     constructor(private questionService: QuestionnaireService,
                 private router: Router,
                 private alertify: AlertifyService) {}

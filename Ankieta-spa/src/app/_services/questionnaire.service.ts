@@ -20,6 +20,10 @@ export class QuestionnaireService {
     return this.http.get<Question>(this.baseUrl + 'questionnaire/' + id);
   }
 
+  getQuestions(): Observable<Question[]> {
+    return this.http.get<Question[]>(this.baseUrl + 'questionnaire');
+  }
+
   sendVote(vote: any) {
     return this.http.post(this.baseUrl + 'questionnaire/vote', vote);
   }

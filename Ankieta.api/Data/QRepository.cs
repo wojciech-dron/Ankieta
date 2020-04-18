@@ -42,5 +42,13 @@ namespace Ankieta.api.Data
         {
             return await _context.SaveChangesAsync() > 0;
         }
+
+        public async Task<IList<Questionnaire>> GetQuestionnaires()
+        {
+            return await _context
+                .Questionnaires
+                .OrderByDescending(q => q.ExpirationAt)
+                .ToListAsync();
+        }
     }
 }

@@ -1,0 +1,7 @@
+<h6 class="mb-3">Odpowiedzi:</h6>
+<div class="mb-3 pl-3">
+  <div class="mb-3 pl-3" *ngFor="let answer of questionnaire.answers">
+    <label class="form-check-label row">{{answer.content}}</label>
+    <span class="row small" >Liczba głosów: {{answer.votesCount}}</span>
+  </div>
+</div>

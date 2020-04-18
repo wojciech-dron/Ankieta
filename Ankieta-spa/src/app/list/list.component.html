@@ -1,0 +1,12 @@
+<div class="container">
+  <h2 class="mb-3">Dostępne ankiety:</h2>
+
+  <div class="pl-3">
+    <div class="mb-3" *ngFor="let question of questions">
+      <a class="question" [routerLink]="['/questionnaire/', question.id]">{{question.title}}</a>
+      <span *ngIf="question.isActive" class="row small text-success">aktywny</span>
+      <span *ngIf="!question.isActive" class="row small text-secondary">nieaktywny</span>
+    </div>
+  </div>
+
+</div>
