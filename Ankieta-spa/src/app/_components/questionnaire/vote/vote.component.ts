@@ -28,7 +28,9 @@ export class VoteComponent implements OnInit {
 
   submit() {
     this.questService.sendVote(this.vote.value).subscribe(next => {
-      this.router.navigate(['/questionnaire/' + this.route.snapshot.params.id]);
+      this.router.navigate(['/blank']).then(() => {
+        this.router.navigate(['/questionnaire/' + this.route.snapshot.params.id]);
+      });
       this.alertify.success('Głos dodany!');
     }, error => {
       this.router.navigate(['/home']);

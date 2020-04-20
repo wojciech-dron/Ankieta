@@ -1,5 +1,5 @@
 import { Resolve, Router, ActivatedRouteSnapshot } from '@angular/router';
-import { Question } from '../_models/question';
+import { Question } from '../_interfaces/question';
 import { QuestionnaireService } from '../_services/questionnaire.service';
 import { Observable, of } from 'rxjs';
 import { Injectable } from '@angular/core';

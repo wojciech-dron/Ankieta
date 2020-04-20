@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Question } from '../../_interfaces/question';
 import { ActivatedRoute } from '@angular/router';
-import { Question } from '../_interfaces/question';
 
 @Component({
   // tslint:disable-next-line: component-selector

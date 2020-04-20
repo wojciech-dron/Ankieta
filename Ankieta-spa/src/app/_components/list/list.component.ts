@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Question } from '../_interfaces/question';
-
+import { Question } from '../../_interfaces/question';
 
 @Component({
   selector: 'app-list',

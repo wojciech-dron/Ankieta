@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
-import { QuestionnaireService } from '../_services/questionnaire.service';
-import { AlertifyService } from '../_services/alertify.service';
+import { QuestionnaireService } from '../../_services/questionnaire.service';
+import { AlertifyService } from '../../_services/alertify.service';
 import { Router } from '@angular/router';
 
 @Component({

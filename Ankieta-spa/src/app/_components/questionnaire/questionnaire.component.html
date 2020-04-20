@@ -1,0 +1,12 @@
+<div class="container">
+  <h2 class="mb-3">{{questionnaire.title}}</h2>
+
+  <div *ngIf="questionnaire.isActive">
+    <app-vote [questionnaire]="questionnaire"></app-vote>
+  </div>
+
+  <div *ngIf="!questionnaire.isActive">
+    <app-result [questionnaire]="questionnaire"></app-result>
+  </div>
+
+</div>
